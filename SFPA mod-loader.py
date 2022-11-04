@@ -2,8 +2,8 @@ import os
 import tkinter as tk
 import shutil
 
-print("log window\n-----------")
-
+print("log window\n-----------\n")
+    
 def button_pressed(button):
     replaceMod(button.cget("text"))
     
@@ -26,7 +26,7 @@ def launchGame():
     os.system("TASKKILL /F /IM SFPA.exe")
     print("Launching game...")
     os.startfile(r'game\SFPA.exe')
-    
+
 window = tk.Tk()
 window.title("SFPA mod-loader")
 window.configure(bg='#ffc800')
@@ -39,14 +39,14 @@ tk.Label(text="Mod List",bg='#ffc800',font=("Verdana", 15,"bold")).pack()
 
 
 for mod in mods:
-    mod = str(mod)[:-4]
-    button = tk.Button(window, text=mod,bg='#ffaa00',font=("Verdana", 13))
-    button.config(command=lambda button=button: button_pressed(button))
-    button.pack(side="top", fill="both", expand=True)
-    text_list.append(button)
+    if str(mod[-4:]) == ".swf":
+        mod = str(mod)[:-4]
+        button = tk.Button(window, text=mod,bg='#ffaa00',font=("Verdana", 13))
+        button.config(command=lambda button=button: button_pressed(button))
+        button.pack(side="top", fill="both", expand=True)
+        text_list.append(button)
 
 infolabel = tk.Label(text="Please select a mod",bg='#ffc800',font=("Verdana", 11))
 
 infolabel.pack()
-
 window.mainloop()
