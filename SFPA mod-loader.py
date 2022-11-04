@@ -13,7 +13,15 @@ def replaceMod(button):
     shutil.copy("files\\"+modname,"game\SFPA.swf"); print("Replacing SFPA.swf with "+modname)
     print("Killing SFPA.exe if running :")
     os.system('tasklist | find /i "SFPA.exe" && taskkill /im SFPA.exe /F || echo process "SFPA.exe" not running.')
+    changeGameTitle(button.cget("text"))
     os.startfile(r'game\SFPA.exe'); print("\nLaunching game.")
+
+def changeGameTitle(name):
+    with open(r'game\META-INF\AIR\application.xml', 'r') as file:
+        data = file.readlines()
+    data[14] = '    <name>'+name+'</name>\n'
+    with open(r'game\META-INF\AIR\application.xml', 'w') as file:
+        file.writelines(data)
 
 #Title (Mod List)
 tk.Label(window, text="Mod List",bg='#ffc800',font=("Verdana", 15,"bold")).pack(side="top",fill="x")
