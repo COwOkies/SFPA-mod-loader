@@ -27,6 +27,7 @@ def changeGameTitle(name):
 tk.Label(window, text="Mod List",bg='#ffc800',font=("Verdana", 15,"bold")).pack(side="top",fill="x")
 
 #Setup mods buttons
+count=0
 mods = os.listdir(r'files')
 for mod in mods:
     if str(mod[-4:]) == ".swf" or str(mod[-4:]) == ".swp":
@@ -35,7 +36,10 @@ for mod in mods:
         if str(mod[-4:]) == ".swp": button.config(bg='#ffdd00',font=("Verdana", 13,"italic"))
         button.config(command=lambda button=button: replaceMod(button))
         button.pack(side="top", fill="x", expand=True)
-
+        count+=1
 #Label+TK loop
-tk.Label(window, text="Please select a mod",bg='#ffc800',font=("Verdana", 11)).pack()
+test = tk.Label(window, text="Please select a mod",bg='#ffc800',font=("Verdana", 11))
+test.pack()
+if count==0:
+    test.configure(text="No mods detected, please put mods in the \"files\" folder.")
 window.mainloop()
